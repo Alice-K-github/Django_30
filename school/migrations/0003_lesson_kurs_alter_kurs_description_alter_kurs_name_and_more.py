@@ -7,14 +7,14 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('School', '0002_lesson'),
+        ('school', '0002_lesson'),
     ]
 
     operations = [
         migrations.AddField(
             model_name='lesson',
             name='kurs',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='School.kurs', verbose_name='Курс'),
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='school.kurs', verbose_name='Курс'),
         ),
         migrations.AlterField(
             model_name='kurs',

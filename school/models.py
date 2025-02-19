@@ -1,5 +1,4 @@
 from django.db.models import CASCADE
-from rest_framework import serializers
 from django.db import models
 
 
@@ -32,15 +31,6 @@ class Kurs(models.Model):
     class Meta:
         verbose_name = 'наименование курса'
         verbose_name_plural = 'наименования курсов'
-
-
-class KursSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Kurs
-        fields = (
-            'name', 'description', 'preview'
-        )
-
 
 
 
@@ -82,11 +72,4 @@ class Lesson(models.Model):
         verbose_name = 'наименование урока'
         verbose_name_plural = 'наименования уроков'
 
-
-class LessonSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Lesson
-        fields = (
-            'name', 'description', 'preview', 'video', 'kurs'
-        )
 

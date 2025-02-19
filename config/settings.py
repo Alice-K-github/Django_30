@@ -37,8 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'School',
-    'User',
+    'school',
+    'user',
     'rest_framework',
 ]
 
@@ -138,7 +138,7 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'User.CustomUser'
-LOGIN_REDIRECT_URL = '/School/'
-LOGOUT_REDIRECT_URL = '/School/'
+AUTH_USER_MODEL = 'user.CustomUser'
+LOGIN_REDIRECT_URL = '/school/'
+LOGOUT_REDIRECT_URL = '/school/'
 

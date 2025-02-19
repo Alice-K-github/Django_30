@@ -1,6 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from rest_framework import serializers
+
 
 
 class CustomUser(AbstractUser):
@@ -21,10 +21,6 @@ class CustomUser(AbstractUser):
     def __str__(self):
         return self.email
 
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CustomUser
-        fields = ['id', 'username', 'email', 'is_staff']
 
 
 

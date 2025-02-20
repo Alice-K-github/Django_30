@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from User.models import CustomUser
+from user.models import CustomUser
 
 
 # Форма регистрации

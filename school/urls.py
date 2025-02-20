@@ -2,8 +2,9 @@ from django.contrib import admin
 from django.urls import path
 from rest_framework.routers import DefaultRouter
 
-from school.models import LessonSerializer, Lesson
-from school.views import home, KursViewSet, LessonListAPIView, LessonRetrieveAPIView, LessonCreateAPIViewAPIView, \
+from school.models import Lesson
+from school.serializers import LessonSerializer
+from school.views import KursViewSet, LessonListAPIView, LessonRetrieveAPIView, LessonCreateAPIViewAPIView, \
     LessonUpdateAPIView, LessonDestroyAPIView
 
 app_name = 'school'

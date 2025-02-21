@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'school',
     'user',
     'rest_framework',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -79,7 +80,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres1',
+        'NAME': 'postgres2',
         'USER': 'postgres',
         'PASSWORD': 'AlisaKa145',
         'HOST': '127.0.0.1',
@@ -141,4 +142,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'user.CustomUser'
 LOGIN_REDIRECT_URL = '/school/'
 LOGOUT_REDIRECT_URL = '/school/'
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ),
+}
 

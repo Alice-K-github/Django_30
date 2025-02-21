@@ -1,6 +1,8 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.db.models import CASCADE
 
+import school
 
 
 class CustomUser(AbstractUser):
@@ -21,6 +23,22 @@ class CustomUser(AbstractUser):
     def __str__(self):
         return self.email
 
+
+class Pays(models.Model):
+    choices = models.TextChoices('Наличные', 'Перевод на счёт')
+    user = models.ForeignKey(CustomUser, on_delete=CASCADE, null=True, blank=True, verbose_name='Пользователь')
+    pay_data = models.DateTimeField(verbose_name="Дата оплаты", null=True, blank=True)
+    payed_kurs = models.ForeignKey('school.Kurs', on_delete=CASCADE, verbose_name="Оплаченный курс", null=True, blank=True)
+    payed_lesson = models.ForeignKey('school.Lesson', on_delete=CASCADE, verbose_name="Оплаченный урок", null=True, blank=True)
+    pay_sum = models.CharField(verbose_name="Оплаченная сумма", null=True, blank=True)
+    way_to_pay = models.CharField(choices=choices, verbose_name='Способ оплаты', null=True, blank=True)
+
+    def __str__(self):
+        return f'{self.user} {self.payed_kurs} {self.payed_lesson}'
+
+    class Meta:
+        verbose_name = 'платёж'
+        verbose_name_plural = 'платежи'
 
 
 

@@ -1,7 +1,6 @@
 from rest_framework import serializers
-from school.models import Kurs, Lesson
-
-
+from school.models import Kurs, Lesson, Pays
+from user.serializers import UserSerializer
 
 
 class LessonSerializer(serializers.ModelSerializer):
@@ -24,4 +23,14 @@ class KursSerializer(serializers.ModelSerializer):
             'name', 'description', 'preview'
         )
 
+
+class PaysSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+    payed_kurs = KursSerializer(read_only=True)
+    payed_lesson = LessonSerializer(read_only=True)
+    class Meta:
+        model = Pays
+        fields = (
+            'id', 'choices', 'user', 'pay_data', 'payed_kurs', 'payed_lesson', 'pay_sum', 'way_to_pay'
+        )
 

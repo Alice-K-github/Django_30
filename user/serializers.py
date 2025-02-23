@@ -4,6 +4,9 @@ import school
 from school.serializers import KursSerializer, LessonSerializer
 from user.models import CustomUser, Pays
 
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -20,4 +23,17 @@ class PaysSerializer(serializers.ModelSerializer):
         fields = (
             'id', 'choices', 'user', 'pay_data', 'payed_kurs', 'payed_lesson', 'pay_sum', 'way_to_pay'
         )
+
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+
+        # Добавление пользовательских полей в токен
+        token['username'] = user.username
+        token['email'] = user.email
+
+        return token
+
 

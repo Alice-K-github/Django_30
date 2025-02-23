@@ -10,6 +10,8 @@ class LessonSerializer(serializers.ModelSerializer):
             'name', 'description', 'preview', 'video', 'kurs'
         )
 
+
+
 class KursSerializer(serializers.ModelSerializer):
     Lesson_count = serializers.SerializerMethodField()
     Lessons = LessonSerializer(many=True, read_only=True)

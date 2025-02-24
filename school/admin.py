@@ -1,5 +1,4 @@
 from django.contrib import admin
-
 from school.models import Kurs, Lesson
 
 
@@ -11,6 +10,7 @@ class KursAdmin(admin.ModelAdmin):
         "description",
         "preview",
     )
+
 
 @admin.register(Lesson)
 class LessonAdmin(admin.ModelAdmin):

@@ -1,5 +1,4 @@
 from django.contrib.auth.views import LoginView, LogoutView
-from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import FormView
 from rest_framework import generics
@@ -8,7 +7,6 @@ from user.Forms import CustomUserCreationForm
 from user.models import Pays
 from user.serializers import PaysSerializer, MyTokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
-
 
 
 class CustomLoginView(LoginView):
@@ -37,5 +35,3 @@ class PaysListAPIView(generics.ListAPIView):
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
-
-

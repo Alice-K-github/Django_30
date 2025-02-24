@@ -1,7 +1,6 @@
 from django.template.context_processors import request
 from rest_framework import serializers
 from rest_framework.generics import get_object_or_404
-
 from school.models import Kurs, Lesson, Subscription
 from school.validators import VideoCustomValidator
 
@@ -13,7 +12,6 @@ class LessonSerializer(serializers.ModelSerializer):
             'name', 'description', 'preview', 'video', 'kurs'
         )
         validators = [VideoCustomValidator(field='video')]
-
 
 
 class KursSerializer(serializers.ModelSerializer):
@@ -34,8 +32,6 @@ class KursSerializer(serializers.ModelSerializer):
         else:
             return False
 
-
-
     class Meta:
         model = Kurs
         fields = (
@@ -49,4 +45,3 @@ class SubscriptionSerializer(serializers.ModelSerializer):
         fields = (
             'user', 'kurs'
         )
-

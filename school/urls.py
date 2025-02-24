@@ -14,14 +14,21 @@ urlpatterns = router.urls
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('lessons/', LessonListAPIView.as_view(queryset=Lesson.objects.all(), serializer_class=LessonSerializer), name='lesson_list'),
-    path('lessons/<int:pk>/', LessonRetrieveAPIView.as_view(queryset=Lesson.objects.all(), serializer_class=LessonSerializer), name='lesson_Retrieve'),
-    path('lessons/new/', LessonCreateAPIViewAPIView.as_view(queryset=Lesson.objects.all(), serializer_class=LessonSerializer), name='lesson_Create'),
-    path('lessons/<int:pk>/update/', LessonUpdateAPIView.as_view(queryset=Lesson.objects.all(), serializer_class=LessonSerializer), name='lesson_Update'),
-    path('lessons/<int:pk>/delete/', LessonDestroyAPIView.as_view(queryset=Lesson.objects.all(), serializer_class=LessonSerializer), name='lesson_Destroy'),
-path('subscription/', SubscriptionAPIView.as_view(queryset=Subscription.objects.all(), serializer_class=SubscriptionSerializer), name='subscription'),
-    ] + router.urls
-
-
-
-
+    path('lessons/', LessonListAPIView.as_view(queryset=Lesson.objects.all(),
+                                               serializer_class=LessonSerializer),
+                                                name='lesson_list'),
+    path('lessons/<int:pk>/', LessonRetrieveAPIView.as_view(queryset=Lesson.objects.all(),
+                                                            serializer_class=LessonSerializer),
+                                                            name='lesson_Retrieve'),
+    path('lessons/new/', LessonCreateAPIViewAPIView.as_view(queryset=Lesson.objects.all(),
+                                                            serializer_class=LessonSerializer),
+                                                            name='lesson_Create'),
+    path('lessons/<int:pk>/update/', LessonUpdateAPIView.as_view(queryset=Lesson.objects.all(),
+                                                                 serializer_class=LessonSerializer),
+                                                                 name='lesson_Update'),
+    path('lessons/<int:pk>/delete/', LessonDestroyAPIView.as_view(queryset=Lesson.objects.all(),
+                                                                  serializer_class=LessonSerializer),
+                                                                  name='lesson_Destroy'),
+    path('subscription/', SubscriptionAPIView.as_view(queryset=Subscription.objects.all(),
+                                                  serializer_class=SubscriptionSerializer), name='subscription'),
+        ] + router.urls

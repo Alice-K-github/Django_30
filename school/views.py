@@ -28,7 +28,6 @@ class Is_Owner(BasePermission):
         return False
 
 
-
 class KursViewSet(viewsets.ModelViewSet):
     serializer_class = KursSerializer
     queryset = Kurs.objects.all()
@@ -59,7 +58,6 @@ class KursViewSet(viewsets.ModelViewSet):
         return self.get_paginated_response(serializer.data)
 
 
-
 class LessonListAPIView(generics.ListAPIView):
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
@@ -73,13 +71,10 @@ class LessonListAPIView(generics.ListAPIView):
         return self.get_paginated_response(serializer.data)
 
 
-
-
 class LessonRetrieveAPIView(generics.RetrieveAPIView):
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
     permission_classes = [Is_Moder, Is_Owner]
-
 
 
 class LessonCreateAPIViewAPIView(generics.CreateAPIView):
@@ -94,7 +89,6 @@ class LessonUpdateAPIView(generics.UpdateAPIView):
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
     permission_classes = [Is_Moder, Is_Owner]
-
 
 
 class LessonDestroyAPIView(generics.DestroyAPIView):
@@ -121,5 +115,3 @@ class SubscriptionAPIView(APIView):
             subs_item.create()
             message = 'подписка добавлена'
         return Response({"message": message})
-
-

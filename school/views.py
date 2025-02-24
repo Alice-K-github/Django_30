@@ -1,10 +1,14 @@
 from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework import generics
+from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import BasePermission, SAFE_METHODS, IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
-from school.models import Kurs, Lesson
-from school.serializers import KursSerializer, LessonSerializer
+from school.paginators import KursPagination, LessonPagination
+from school.models import Kurs, Lesson, Subscription
+from school.serializers import KursSerializer, LessonSerializer, SubscriptionSerializer
 
 
 class Is_Moder(BasePermission):
@@ -28,6 +32,7 @@ class Is_Owner(BasePermission):
 class KursViewSet(viewsets.ModelViewSet):
     serializer_class = KursSerializer
     queryset = Kurs.objects.all()
+    pagination_class = KursPagination
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
@@ -47,12 +52,25 @@ class KursViewSet(viewsets.ModelViewSet):
             self.permission_classes = [Is_Moder, Is_Owner]
         return [permission() for permission in self.permission_classes]
 
+    def get(self, request):
+        queryset = Kurs.objects.all()
+        paginated_queryset = self.paginate_queryset(queryset)
+        serializer = KursSerializer(paginated_queryset, many=True)
+        return self.get_paginated_response(serializer.data)
+
 
 
 class LessonListAPIView(generics.ListAPIView):
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
     permission_classes = [Is_Moder, Is_Owner]
+    pagination_class = LessonPagination
+
+    def get(self, request):
+        queryset = Lesson.objects.all()
+        paginated_queryset = self.paginate_queryset(queryset)
+        serializer = LessonSerializer(paginated_queryset, many=True)
+        return self.get_paginated_response(serializer.data)
 
 
 
@@ -84,5 +102,24 @@ class LessonDestroyAPIView(generics.DestroyAPIView):
     queryset = Lesson.objects.all()
     permission_classes = [Is_Owner]
 
+
+class SubscriptionAPIView(APIView):
+    serializer_class = SubscriptionSerializer
+    queryset = Subscription.objects.all()
+    permission_classes = [IsAuthenticated]
+
+    def post(self, *args, **kwargs):
+        user = self.request.user
+        kurs_id = self.request.data.get(id)
+        kurs_item = get_object_or_404(Kurs, kurs_id)
+        # объекты подписок по текущему пользователю и курса
+        subs_item = Subscription.objects.filter(user=user, kurs=kurs_item)
+        if subs_item.exists():
+            subs_item.delete()
+            message = 'подписка удалена'
+        else:
+            subs_item.create()
+            message = 'подписка добавлена'
+        return Response({"message": message})
 
 

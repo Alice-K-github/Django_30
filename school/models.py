@@ -5,6 +5,7 @@ from user.models import CustomUser
 
 
 class Kurs(models.Model):
+    # Курсы
     name = models.CharField(verbose_name="Название", blank=True, null=True, help_text='Введите название курса')
     preview = models.ImageField(upload_to='media/', verbose_name='Изображение(превью)', blank=True, null=True, help_text='Укажите превью(изображение)')
     description = models.CharField(verbose_name="Описание", blank=True, null=True, help_text='Введите описание курса')
@@ -20,6 +21,7 @@ class Kurs(models.Model):
 
 
 class Lesson(models.Model):
+    # Уроки
     name = models.CharField(verbose_name="Название", blank=True, null=True, help_text='Введите название урока')
     description = models.CharField( verbose_name="Описание", blank=True, null=True, help_text='Введите описание урока')
     preview = models.ImageField(upload_to='media/', verbose_name='Изображение(превью)', blank=True, null=True, help_text='Укажите превью(изображение)')
@@ -33,5 +35,11 @@ class Lesson(models.Model):
     class Meta:
         verbose_name = 'наименование урока'
         verbose_name_plural = 'наименования уроков'
+
+
+class Subscription(models.Model):
+    # Подписка
+    user = models.ForeignKey(CustomUser, on_delete=CASCADE, verbose_name="Пользователь", blank=True, null=True)
+    kurs = models.ForeignKey(Kurs, on_delete=CASCADE, verbose_name="Курс", blank=True, null=True)
 
 

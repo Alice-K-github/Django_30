@@ -1,14 +1,15 @@
-from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework import generics
 from rest_framework.generics import get_object_or_404
-from rest_framework.permissions import BasePermission, SAFE_METHODS, IsAuthenticated
+from rest_framework.permissions import (BasePermission,
+                                        SAFE_METHODS, IsAuthenticated)
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
 from school.paginators import KursPagination, LessonPagination
-from school.models import Kurs, Lesson, Subscription
-from school.serializers import KursSerializer, LessonSerializer, SubscriptionSerializer
+from school.models import (Kurs, Lesson,
+                           Subscription)
+from school.serializers import (KursSerializer,
+                                LessonSerializer, SubscriptionSerializer)
 
 
 class Is_Moder(BasePermission):

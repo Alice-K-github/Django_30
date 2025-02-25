@@ -8,9 +8,16 @@ from user.models import CustomUser
 
 class LessonTestCase(APITestCase):
     def setUp(self):
-        self.user = CustomUser.objects.create(email='admin@example.com', password="123123")
-        self.kurs = Kurs.objects.create(name='Курс', description='Описание', owner=self.user)
-        self.lesson = Lesson.objects.create(name='Урок', description='Урок1', kurs=self.kurs, owner=self.user)
+        self.user = CustomUser.objects.create(
+            email='admin@example.com',
+            password="123123")
+        self.kurs = Kurs.objects.create(name='Курс',
+                                        description='Описание',
+                                        owner=self.user)
+        self.lesson = Lesson.objects.create(name='Урок',
+                                            description='Урок1',
+                                            kurs=self.kurs,
+                                            owner=self.user)
         self.client.force_authenticate(user=self.user)
 
     def test_lesson_retrieve(self):
@@ -22,7 +29,9 @@ class LessonTestCase(APITestCase):
 
     def test_lesson_create(self):
         url = reverse('school:lesson_Create')
-        data = {'name': 'Урок2', 'description': 'Урок второй', 'kurs': self.kurs.pk}
+        data = {'name': 'Урок2',
+                'description': 'Урок второй',
+                'kurs': self.kurs.pk}
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Lesson.objects.all().count(), 2)
@@ -47,7 +56,9 @@ class LessonTestCase(APITestCase):
         self.assertEqual(
             response.data,
             {'count': 1, 'next': None, 'previous': None, 'results':
-                [{'id': self.lesson.pk, 'name': self.lesson.name, 'description': self.lesson.description,
+                [{'id': self.lesson.pk,
+                  'name': self.lesson.name,
+                  'description': self.lesson.description,
                   'preview': None, 'video': None,
                   'kurs': self.lesson.kurs.pk, 'owner': self.lesson.owner.pk}]}
         )
@@ -56,10 +67,17 @@ class LessonTestCase(APITestCase):
 class SubscriptionTestCase(APITestCase):
 
     def setUp(self):
-        self.user = CustomUser.objects.create(email='admin@admin.com', password="123123")
-        self.kurs = Kurs.objects.create(name='Джанго', description='Уроки по Джанго', owner=self.user)
-        self.lesson = Lesson.objects.create(name='Урок 1', description='Начало', kurs=self.kurs, owner=self.user)
-        self.subscription = Subscription.objects.create(kurs=self.kurs, user=self.user)
+        self.user = CustomUser.objects.create(email='admin@admin.com',
+                                              password="123123")
+        self.kurs = Kurs.objects.create(name='Джанго',
+                                        description='Уроки по Джанго',
+                                        owner=self.user)
+        self.lesson = Lesson.objects.create(
+            name='Урок 1', description='Начало',
+            kurs=self.kurs, owner=self.user)
+        self.subscription = Subscription.objects.create(
+            kurs=self.kurs,
+            user=self.user)
         self.client.force_authenticate(user=self.user)
 
     def test_subscription(self):

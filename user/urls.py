@@ -13,5 +13,4 @@ urlpatterns = [
         path('accounts/', include('django.contrib.auth.urls')),
         path('pays/list/', PaysListAPIView.as_view(), name='pays_list'),
         path('token/', MyTokenObtainPairView.as_view(),
-             name='token_obtain_pair'),
-    ]
+             name='token_obtain_pair'),]

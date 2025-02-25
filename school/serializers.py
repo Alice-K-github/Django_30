@@ -1,4 +1,3 @@
-from django.template.context_processors import request
 from rest_framework import serializers
 from rest_framework.generics import get_object_or_404
 from school.models import Kurs, Lesson, Subscription

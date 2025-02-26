@@ -49,6 +49,10 @@ class Pays(models.Model):
     way_to_pay = models.CharField(choices=choices,
                                   verbose_name='Способ оплаты',
                                   null=True, blank=True)
+    session_id = models.CharField(verbose_name='ID сессии',
+                                  null=True, blank=True)
+    link = models.URLField(verbose_name='Ссылка на оплату',
+                           null=True, blank=True)
 
     def __str__(self):
         return f'{self.user} {self.payed_kurs} {self.payed_lesson}'

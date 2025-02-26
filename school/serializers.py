@@ -34,7 +34,8 @@ class KursSerializer(serializers.ModelSerializer):
     class Meta:
         model = Kurs
         fields = (
-            'name', 'description', 'preview', 'Lessons', 'Lesson_count'
+            'name', 'description', 'preview',
+            'Lessons', 'Lesson_count', 'Is_subscribe'
         )
 
 

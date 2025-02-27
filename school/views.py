@@ -10,6 +10,7 @@ from school.models import (Kurs, Lesson,
                            Subscription)
 from school.serializers import (KursSerializer,
                                 LessonSerializer, SubscriptionSerializer)
+from school.tasks import News_in_kurs
 
 
 class Is_Moder(BasePermission):
@@ -36,6 +37,11 @@ class KursViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+    def perform_update(self, serializer):
+        kurs = serializer.save()
+        News_in_kurs.delay(kurs.pk)
+        return kurs
 
     def get_permissions(self):
         if self.action == 'update':

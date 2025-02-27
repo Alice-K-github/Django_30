@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'drf_yasg',
     'corsheaders',
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
@@ -169,3 +170,38 @@ CORS_ALLOWED_ORIGINS = [
 CORS_ALLOW_ALL_ORIGINS = False
 
 STRIPE_API_KEY = os.getenv('STRIPE_API_KEY')
+
+# Настройка Celery
+CELERY_BROKER_URL = 'redis://localhost:6379/2' # Например, Redis, который по умолчанию работает на порту 6379
+
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/2' # URL-адрес брокера результатов, также Redis
+
+CELERY_TIMEZONE = "Australia/Tasmania" # Часовой пояс для работы Celery
+
+CELERY_TASK_TRACK_STARTED = True # Флаг отслеживания выполнения задач
+
+CELERY_TASK_TIME_LIMIT = 30 * 60 # Максимальное время на выполнение задачи
+
+CELERY_BEAT_SCHEDULE = {
+    'check_last_login': {
+        'task': 'school.tasks.check_last_login',  # Путь к задаче
+        'schedule': timedelta(days=1),  # Расписание выполнения задачи
+    },
+}
+
+#Подключение кэша (Redis)
+CACHE_ENABLED = True
+if CACHE_ENABLED:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+            'LOCATION': 'redis://127.0.0.1:6379/1',
+        }
+    }
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+SESSION_CACHE_ALIAS = 'default'
+
+'''AUTHENTICATION_BACKENDS = [
+         'django.contrib.auth.backends.ModelBackend',
+     ]'''

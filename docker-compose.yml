@@ -21,6 +21,29 @@ services:
       - .env
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U myuser" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+  redis:
+    image: redis
+    restart: always
+    container_name: 'affectionate_bhaskara'
+    command: redis-server
+    ports:
+      - '6379:6379'
+  celery:
+    build: .
+    container_name: 'inspiring_galileo'
+    command: celery -A core worker -B
+    volumes:
+      - .:/code
+    links:
+      - redis
+    depends_on:
+      - web
+      - redis
 volumes:
   postgres_data:
   static_volume:

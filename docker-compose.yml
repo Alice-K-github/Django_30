@@ -29,13 +29,13 @@ services:
   redis:
     image: redis
     restart: always
-    container_name: 'affectionate_bhaskara'
+    container_name: 'redis_app'
     command: redis-server
     ports:
-      - '6379:6379'
+      - '6379:6379/4'
   celery:
     build: .
-    container_name: 'inspiring_galileo'
+    container_name: 'celery_app'
     command: celery -A core worker -B
     volumes:
       - .:/code

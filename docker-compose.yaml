@@ -1,6 +1,5 @@
 # docker-compose up
-version: '3.9'
-
+# ssh admin@130.193.53.190
 services:
   web:
     build: .

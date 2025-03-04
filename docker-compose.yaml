@@ -1,5 +1,5 @@
 # docker-compose up
-# ssh admin@130.193.53.190
+# ssh admin@84.201.178.78
 services:
   web:
     build: .

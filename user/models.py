@@ -30,7 +30,7 @@ class CustomUser(AbstractUser):
 
 
 class Pays(models.Model):
-    choices = models.TextChoices('Наличные', 'Перевод на счёт')
+    choices = (('Наличные', 'наличные'), ('Перевод на счёт', 'перевод на счёт'))
     user = models.ForeignKey(CustomUser,
                              on_delete=CASCADE,
                              null=True, blank=True,

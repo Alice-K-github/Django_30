@@ -39,7 +39,7 @@ services:
   celery:
     build: .
     container_name: 'celery_app'
-    command: celery --app=core worker --loglevel=info
+    command: celery --app=config worker --loglevel=info
     volumes:
       - .:/code
     links:

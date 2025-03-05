@@ -86,11 +86,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres2',
-        'USER': 'postgres',
-        'PASSWORD': 'AlisaKa145',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'NAME': os.getenv("POSTGRES_DB"),
+        'USER': os.getenv("POSTGRES_USER"),
+        'PASSWORD': os.getenv("POSTGRES_PASSWORD"),
+        'HOST': os.getenv("POSTGRES_HOST"),
+        'PORT': os.getenv("POSTGRES_PORT"),
     }
 }
 
@@ -173,9 +173,9 @@ CORS_ALLOW_ALL_ORIGINS = False
 STRIPE_API_KEY = os.getenv('STRIPE_API_KEY')
 
 # Настройка Celery
-CELERY_BROKER_URL = 'redis://localhost:6379/2' # Например, Redis, который по умолчанию работает на порту 6379
+CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL")
 
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/2' # URL-адрес брокера результатов, также Redis
+CELERY_RESULT_BACKEND = os.getenv("CELERY_RESULT_BACKEND") # URL-адрес брокера результатов, также Redis
 
 CELERY_TIMEZONE = "Australia/Tasmania" # Часовой пояс для работы Celery
 

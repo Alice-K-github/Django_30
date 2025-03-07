@@ -6,7 +6,7 @@ from celery import Celery
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
 
 # Создание экземпляра объекта Celery
-app = Celery('config', broker="redis://redis:6379/2", include=[
+app = Celery('conf', broker="redis://redis:6379/2", include=[
         "school.tasks",
     ],)
 

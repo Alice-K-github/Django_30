@@ -12,7 +12,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 ENV SECRET_KEY='django-insecure-v@d4$20cv#^x32^-cktx-j%xhtn4rxu+hz_*&m1yu^$w5pjtu+'
-ENV CELERY_BROKER_URL='redis://localhost:6379/2'
+ENV CELERY_BROKER_URL='redis://redis:6379/2'
 
 RUN mkdir -p /app/media/
 

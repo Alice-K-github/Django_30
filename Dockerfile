@@ -11,6 +11,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Копируем остальные файлы проекта в контейнер
 COPY . .
 
+ENV DATABASE_URL='postgres://postgres:AlisaKa145@localhost:5432/postgres2'
 ENV SECRET_KEY='django-insecure-v@d4$20cv#^x32^-cktx-j%xhtn4rxu+hz_*&m1yu^$w5pjtu+'
 ENV CELERY_BROKER_URL='redis://redis:6379/2'
 

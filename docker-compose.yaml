@@ -50,8 +50,7 @@ services:
       - web
       - redis
   nginx:
-    build:
-      context: ./nginx
+    build: .
     ports:
       - "80:80"
     volumes:
